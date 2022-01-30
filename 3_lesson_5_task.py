@@ -12,7 +12,7 @@ end_sum = int()
 
 end_flag = True
 
-while end_flag != False:
+while end_flag:
     list_number = input('Введите список чисел. Разделителем является пробел. Для остановки введите #\n')
     for elem in list_number.split(' '):
         if elem == '#':
