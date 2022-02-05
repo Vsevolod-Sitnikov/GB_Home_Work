@@ -1,4 +1,4 @@
-with open('file_2_task.txt', 'r') as file:
+with open('file_2_task.txt', 'r', encoding='UTF-8') as file:
     content = file.readlines()
 
 print(f'количество строк равно {len(content)}')
