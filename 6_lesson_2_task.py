@@ -1,11 +1,11 @@
 class Road:
 
     def __init__(self, lenght, width):
-        self.__lenght = int(lenght)
-        self.__width = int(width)
+        self._lenght = int(lenght)
+        self._width = int(width)
 
     def weight(self, thickness=1):
-        return self.__lenght * self.__width * 25 * thickness
+        return self._lenght * self._width * 25 * thickness
 
 
 road = Road(lenght=200, width=50)
