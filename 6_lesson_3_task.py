@@ -8,6 +8,8 @@ class Worker:
 
 
 class Position(Worker):
+    def __init__(self, name, surname, position, wage, bonus):
+        Worker.__init__(self, name, surname, position, wage, bonus)
 
     def get_full_name(self):
         return f'{self.name}, {self.surname} (должность {self.position})'
