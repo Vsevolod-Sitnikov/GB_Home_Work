@@ -16,8 +16,7 @@ class Car:
         return f'машина повернула на {direction}'
 
     def show_speed(self):
-        if self.speed >= 60:
-            return f'Текущая скорость {self.speed}'
+        return f'Текущая скорость {self.speed}'
 
 
 class TownCar(Car):
