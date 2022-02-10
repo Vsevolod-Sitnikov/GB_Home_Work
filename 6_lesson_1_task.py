@@ -2,19 +2,20 @@ import time
 
 
 class TrafficLight:
-    __color = ['красный', 'желтый', 'зеленый']
 
-    def running():
-        main = True
-        while main:
-            # status = input('Введите статус светофора\n')
-            # if status == 'False':
-            #     break
-            print(f'Светофор {TrafficLight.__color[0]}')
-            time.sleep(7)
-            print(f'Светофор {TrafficLight.__color[1]}')
-            time.sleep(2)
-            print(f'Светофор {TrafficLight.__color[2]}')
-            time.sleep(5)
+    __colors = ['красный', 'желтый', 'зеленый']
+    __timing = [7, 2, 5]
 
-traffic = TrafficLight.running()
+    def __init__(self):
+        self.color = 'зеленый'
+
+    def running(self):
+        while True:
+            for index, elem in enumerate(TrafficLight.__colors):
+                print(f'Светофор {elem}')
+                time.sleep(TrafficLight.__timing[index])
+
+
+traffic = TrafficLight()
+
+traffic.running()
