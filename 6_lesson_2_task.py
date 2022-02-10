@@ -4,8 +4,8 @@ class Road:
         self._lenght = int(lenght)
         self._width = int(width)
 
-    def weight(self, thickness=1):
-        return self._lenght * self._width * 25 * thickness
+    def weight(self, asphalt_mass=25, thickness=1):
+        return self._lenght * self._width * asphalt_mass * thickness / 1000
 
 
 road = Road(lenght=200, width=50)
