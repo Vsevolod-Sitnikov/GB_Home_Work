@@ -7,17 +7,17 @@ class Matrix:
         for elem in self.matrix:
             result += str(elem)[1:-1] + '\n'
         return result
-#вариант с костылем. плюс не проверены все варианты на отсутствие элемента списка
+#В случае если матрицы одинаковой длины - проблем нет. Если же они разной длины - необходимо расширить матрицы нулями
     def __add__(self, other):
         result = []
         for i in range(len(self.matrix)):
-            intermediate_list = []
+            result.append([])
             for j in range(len(self.matrix[i])):
                 try:
-                    intermediate_list.append(self.matrix[i][j] + other.matrix[i][j])
+                    result[i].append(self.matrix[i][j] + other.matrix[i][j])
                 except IndexError:
-                    intermediate_list.append(self.matrix[i][j] + 0)
-            result.append(intermediate_list)
+                    result[i].append(self.matrix[i][j] + 0)
+                print(result[i])
         return Matrix(result)
 
 new_elem = Matrix([[31, 32], [37, 43], [51, 86]])
