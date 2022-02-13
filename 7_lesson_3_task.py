@@ -18,6 +18,7 @@ class Cell:
     def __truediv__(self, other):
         return Cell(int(self.alveola / other.alveola))
 
+#нужно было экранировать \n или нет? не совсем понял из задания
     def make_order(self, alveola_count):
         result = ('*' * alveola_count + '\n') * (self.alveola // alveola_count) + ('*' * (self.alveola % alveola_count))
         print(result)
