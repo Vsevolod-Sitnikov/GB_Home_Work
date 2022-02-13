@@ -32,4 +32,3 @@ new_elem_2 = Matrix([[12, 2], [68, 4], [5, 9]])
 new_elem_3 = new_elem + new_elem_2
 
 print(new_elem_3)
-
