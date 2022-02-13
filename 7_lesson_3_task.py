@@ -19,8 +19,8 @@ class Cell:
         return Cell(int(self.alveola / other.alveola))
 
     def make_order(self, alveola_count):
-        print('*****\n' * (self.alveola // alveola_count), end='')
-        print('*' * (self.alveola % alveola_count))
+        result = ('*' * alveola_count + '\n') * (self.alveola // alveola_count) + ('*' * (self.alveola % alveola_count))
+        print(result)
 
 nutrion_1 = Cell(123)
 
@@ -46,4 +46,4 @@ print(nutrion_5.alveola)
 
 print(nutrion_6.alveola)
 
-nutrion_1.make_order(5)
+nutrion_1.make_order(10)
