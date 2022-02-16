@@ -42,7 +42,12 @@ class Orgtekhnika:
 
     def __init__(self, color, cost):
         self.color = color
-        self.cost = cost
+        try:
+            self.cost = cost
+            if type(cost) != int:
+                raise Type_Devices_Exception(f'Необходимо ввести значение в численом формате')
+        except Type_Devices_Exception as err:
+            print(err)
         self.serial_number = Orgtekhnika.__serial_number
         Orgtekhnika.__serial_number += 1
 
@@ -96,3 +101,5 @@ new_sklad.add_devices([new_xerox, my_printer])
 print(new_xerox.parameters())
 
 print(new_sklad.show_inventory())
+
+new_printer_for_err = Printer('black', '123', 'HP 2205Z')
