@@ -29,6 +29,14 @@ class SkladInterfaces(ABC):
     def show_inventory(self):
         pass
 
+    @abstractmethod
+    def give_device(self):
+        pass
+
+    @abstractmethod
+    def get_device(self):
+        pass
+
 
 class Sklad(SkladInterfaces):
 
@@ -61,12 +69,48 @@ class Sklad(SkladInterfaces):
 
     @classmethod
     def show_all_cost(cls):
+        '''
+        Метод возвращает общую стоимость оборудования на складе
+        :return:
+        '''
         return cls.__all_cost_devices
+
+    def give_device(self, device, departament):
+        if self.remove_device(device):
+            departament.get_device(device)
+        else:
+            print("Книга отсутствует")
+            return 'Invalid operation'
+
+    def get_device(self, device, departament):
+        if departament.remove_device(device):
+            self.add_devices(device)
+        else:
+            print("Книга отсутствует")
+            return 'Invalid operation'
 
 
 class Departament:
-    pass
 
+    __id_department = 0
+
+    def __init__(self, name):
+        self.name = name
+        self.devices = []
+        Departament.__id_department += 1
+
+    def get_id(self):
+        return self.__id_department
+
+    def get_device(self, device):
+        self.devices.append(device)
+        return True
+
+    def remove_device(self, device):
+        if device in self.devices:
+            self.devices.remove(device)
+            return True
+        return False
 
 
 class Orgtekhnika:
