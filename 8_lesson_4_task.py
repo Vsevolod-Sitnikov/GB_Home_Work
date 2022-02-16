@@ -46,13 +46,21 @@ class Sklad(SkladInterfaces):
         self.devices_on_the_sklad = {}
 
     def add_devices(self, devices):
-        for device in devices:
-            serial_number = device.get_serial_number()
+        try:
+            for device in devices:
+                serial_number = device.get_serial_number()
+                if self.devices_on_the_sklad.get(serial_number):
+                    self.devices_on_the_sklad[serial_number] += 1
+                else:
+                    self.devices_on_the_sklad[serial_number] = 1
+                Sklad.__all_cost_devices += device.cost
+        except TypeError:
+            serial_number = devices.get_serial_number()
             if self.devices_on_the_sklad.get(serial_number):
                 self.devices_on_the_sklad[serial_number] += 1
             else:
                 self.devices_on_the_sklad[serial_number] = 1
-            Sklad.__all_cost_devices += device.cost
+            Sklad.__all_cost_devices += devices.cost
 
     def remove_device(self, device):
         device_serial_number = device.get_serial_number()
@@ -79,14 +87,14 @@ class Sklad(SkladInterfaces):
         if self.remove_device(device):
             departament.get_device(device)
         else:
-            print("Книга отсутствует")
+            print("Устройство отсутствует")
             return 'Invalid operation'
 
     def get_device(self, device, departament):
         if departament.remove_device(device):
             self.add_devices(device)
         else:
-            print("Книга отсутствует")
+            print("Устройство отсутствует")
             return 'Invalid operation'
 
 
@@ -118,13 +126,14 @@ class Orgtekhnika:
     __serial_number = 1
 
     def __init__(self, color, cost):
-        self.color = color
         try:
             self.cost = cost
             if type(cost) != int:
                 raise Type_Devices_Exception(f'Необходимо ввести значение в численом формате')
         except Type_Devices_Exception as err:
             print(err)
+            return False
+        self.color = color
         self.serial_number = Orgtekhnika.__serial_number
         Orgtekhnika.__serial_number += 1
 
@@ -175,22 +184,38 @@ print(my_printer.parameters())
 
 new_xerox = Xerox('white', 5000, 'YZ500R')
 
-new_sklad = Sklad()
+main_sklad = Sklad()
 
-new_sklad.add_devices([new_xerox, my_printer])
+main_sklad.add_devices([new_xerox, my_printer])
 
 print(new_xerox.parameters())
 
-print(new_sklad.show_inventory())
+print(main_sklad.show_inventory())
 
-print(new_sklad.show_all_cost())
+print(main_sklad.show_all_cost())
 
-new_sklad.remove_device(new_xerox)
+main_sklad.remove_device(new_xerox)
 
-print(new_sklad.show_all_cost())
+print(main_sklad.show_all_cost())
 
-print(new_sklad.show_inventory())
+print(main_sklad.show_inventory())
 
 new_printer_for_err = Printer('black', '123', 'HP 2205Z')
 
 print(SkladInterfaces.__doc__)
+
+IT_department = Departament('IT_department')
+
+HP_pavilion = Printer('grey', 55000, 'H5304')
+
+main_sklad.add_devices(HP_pavilion)
+
+print(main_sklad.show_inventory())
+
+main_sklad.give_device(HP_pavilion, IT_department)
+
+print(main_sklad.show_inventory())
+
+main_sklad.get_device(HP_pavilion, IT_department)
+
+print(main_sklad.show_inventory())
