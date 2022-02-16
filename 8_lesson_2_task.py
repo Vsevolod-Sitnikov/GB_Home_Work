@@ -2,6 +2,8 @@ class MyException(Exception):
 
     def __init__(self, text):
         self.text = text
+
+
 var_a = int(input("Введите делимое: "))
 
 var_b = int(input("Введите делитель: "))
