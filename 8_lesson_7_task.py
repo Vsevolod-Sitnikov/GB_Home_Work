@@ -21,4 +21,3 @@ number_two = ComplexNumber(5, -3)
 
 number_three = number_one + number_two
 number_four = number_one * number_two
-
